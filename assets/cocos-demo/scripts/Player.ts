@@ -11,31 +11,31 @@ const { ccclass, property } = cc._decorator;
 export default class NewClass extends cc.Component {
 
     @property({
-        type: [Number],
+        type: cc.Float,
         displayName: '主角跳跃高度',
     })
     jumpHeight: number = 0;
 
     @property({
-        type: [Number],
+        type: cc.Float,
         displayName: '主角跳跃持续时间',
     })
     jumpDuration: number = 0;
 
     @property({
-        type: [Number],
+        type: cc.Integer,
         displayName: '最大移动速度',
     })
     maxMoveSpeed: number = 0;
 
     @property({
-        type: [Number],
+        type: cc.Float,
         displayName: '加速度',
     })
     accel: number = 0;
 
     @property({
-        type: [cc.AudioClip],
+        type: cc.AudioClip,
         displayName: '跳跃音效资源',
     })
     jumpAudio: cc.AudioClip = null;

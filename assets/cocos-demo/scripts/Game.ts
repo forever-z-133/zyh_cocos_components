@@ -11,43 +11,43 @@ const { ccclass, property } = cc._decorator;
 export default class NewClass extends cc.Component {
 
     @property({
-        type: [cc.Prefab],
+        type: cc.Prefab,
         displayName: '星星预制资源',
     })
     starPrefab: cc.Prefab = null;
 
     @property({
-        type: [Number],
+        type: cc.Float,
         displayName: '星星消失时间最小值',
     })
     minStarDuration: number = 0;
 
     @property({
-        type: [Number],
+        type: cc.Float,
         displayName: '星星消失时间最大值',
     })
     maxStarDuration: number = 0;
 
     @property({
-        type: [cc.Node],
+        type: cc.Node,
         displayName: '地面节点',
     })
     ground: cc.Node = null;
 
     @property({
-        type: [cc.Node],
+        type: cc.Node,
         displayName: '主角节点',
     })
     player: cc.Node = null;
 
     @property({
-        type: [cc.Label],
+        type: cc.Label,
         displayName: '分数节点',
     })
     scoreDisplay: cc.Label = null;
 
     @property({
-        type: [cc.AudioClip],
+        type: cc.AudioClip,
         displayName: '得分音效资源',
     })
     scoreAudio: cc.AudioClip = null;

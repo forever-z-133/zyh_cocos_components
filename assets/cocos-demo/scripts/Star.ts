@@ -10,7 +10,7 @@ const { ccclass, property } = cc._decorator;
 @ccclass
 export default class NewClass extends cc.Component {
     @property({
-        type: [Number],
+        type: cc.Integer,
         displayName: '碰撞尺寸',
     })
     pickRadius: number = 0;
