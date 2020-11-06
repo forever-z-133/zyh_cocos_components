@@ -22,7 +22,7 @@ export default class ClickAble extends cc.Component {
 
   update(): void {
     const miaoEvent: MiaoEvent = this.node['miaoEvent'];
-    if (miaoEvent.disabled !== this.disabled) {
+    if (miaoEvent && miaoEvent.disabled !== this.disabled) {
       miaoEvent.setDisabled(this.disabled);
     }
   }

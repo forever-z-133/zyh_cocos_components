@@ -26,7 +26,8 @@ export default class DragAble extends cc.Component {
     dropBoxs: cc.Node[] = [];
 
     /// 临时的 Node 节点
-    cacheDragNode: cc.Node = null;
+    origDragNode: cc.Node = null;
+    dragNode: cc.Node = null;
     placeholdNode: cc.Node = null;
     activeDropBox: cc.Node = null;
 
@@ -74,44 +75,28 @@ export default class DragAble extends cc.Component {
     /// 拖拽开始，如果有临时元素，则生成临时元素，否则拖拽自身
     defaultDragStart(e: cc.Event.EventTouch): void {
         const node: cc.Node = e.currentTarget;
-        const dragNode = this.getDragNode(node);
-
-        this.triggerDragStartMethod(dragNode);
-
-        if (this.placeholdPrefab) {
-            this.placeholdNode = cc.instantiate(this.placeholdPrefab);
-            this.node.parent.addChild(this.placeholdNode);
-            this.placeholdNode.setPosition(dragNode.x, dragNode.y);
-        }
+        this.initDragNode(node);
+        this.initPlaceholdNode(this.dragNode);
+        this.triggerDragStartMethod();
     }
 
     /// 拖拽中，移动元素
     defaultDragMove(e: cc.Event.EventTouch): void {
-        const node: cc.Node = e.currentTarget;
         const delta: cc.Vec2 = e.touch.getDelta();
-        const dragNode: cc.Node = this.getDragNode(node);
-        dragNode.x += delta.x;
-        dragNode.y += delta.y;
+        this.dragNode.x += delta.x;
+        this.dragNode.y += delta.y;
     }
 
     /// 拖拽结束，清除临时元素，安放最终结果
     defaultDragEnd(e: cc.Event.EventTouch): void {
-        const node: cc.Node = e.currentTarget;
-        const dragNode: cc.Node = this.getDragNode(node);
-
-        this.triggerDragEndMethod(dragNode);
-
-        if (this.dragPrefab) {
-            node.parent.removeChild(dragNode);
-            node.opacity = 255;
-        }
-        if (this.placeholdPrefab) {
-            this.node.parent.removeChild(this.placeholdNode);
-        }
+        this.triggerDragEndMethod();
+        this.removeDragNode();
+        this.removePlaceholdNode();
     }
 
     /// 公用的开始拖拽
-    triggerDragStartMethod(node: cc.Node) {
+    triggerDragStartMethod() {
+        const node = this.dragNode;
         const { x, y } = node.position;
         const z = node.zIndex || 0;
         const opacity = node.opacity || 255;
@@ -120,27 +105,58 @@ export default class DragAble extends cc.Component {
     }
 
     /// 公用的结束拖拽
-    triggerDragEndMethod(node: cc.Node) {
+    triggerDragEndMethod() {
+        const node = this.origDragNode;
         const { z, opacity } = this.startLocation;
         node.zIndex = z || 0;
         node.opacity = opacity || 255;
+        const { x, y } = this.dragNode.position;
+        node.setPosition(x, y);
     }
 
     /// 获取正在拖拽中的元素，可能是本身，可能是预制体
-    getDragNode(eventTragetNode: cc.Node) {
-        // 已赋予了拖拽元素，则返回
-        if (this.cacheDragNode) return this.cacheDragNode;
-        const { x, y } = eventTragetNode.position;
-        // 能生成拖拽元素就生成
-        if (this.dragPrefab) {
-            const dragNode = cc.instantiate(this.dragPrefab);
-            eventTragetNode.parent.addChild(dragNode);
-            dragNode.setPosition(x, y);
-            eventTragetNode.opacity = 0;
-            this.cacheDragNode = dragNode;
+    initDragNode(node: cc.Node) {
+        this.origDragNode = node;
+        let dragNode: cc.Node = null;
+        if (this.dragNode) {
+            dragNode = this.dragNode;
+            dragNode.active = true;
+        } else if (this.dragPrefab) {
+            // 能生成自定义拖拽元素
+            dragNode = cc.instantiate(this.dragPrefab);
+            node.parent.addChild(dragNode);
+        } else {
+            // 没有自定义的，则可用本身
+            dragNode = node;
         }
-        // 没有预制体，则可用本身
-        return this.cacheDragNode || eventTragetNode;
+        if (this.origDragNode !== node) node.opacity = 0;
+        const { x, y } = node.position;
+        dragNode.setPosition(x, y);
+        this.dragNode = dragNode;
+        return dragNode;
+    }
+    removeDragNode() {
+        if (this.dragPrefab) {
+            this.dragNode.active = false;
+            this.origDragNode.opacity = 255;
+        }
+    }
+
+    initPlaceholdNode(dragNode: cc.Node) {
+        let placeholdNode: cc.Node = null;
+        if (this.placeholdPrefab) {
+            placeholdNode = cc.instantiate(this.placeholdPrefab);
+            placeholdNode.setPosition(dragNode.x, dragNode.y);
+            this.node.parent.addChild(placeholdNode);
+        }
+        this.placeholdNode = placeholdNode;
+        return placeholdNode;
+    }
+    removePlaceholdNode() {
+        if (this.placeholdNode) {
+            this.node.parent.removeChild(this.placeholdNode);
+            this.placeholdNode = null;
+        }
     }
 
     /// 播放动画回归到原始位置
