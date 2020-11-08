@@ -19,7 +19,12 @@ export default class RadioCheckbox extends cc.Component {
         displayName: '选项可取消'
     })
     canResume: boolean = false;
-    
+
+    @property({
+        displayName: '初始值'
+    })
+    defaultValue: string = '';
+
     chosenData: any[] = [];
 
     onLoad() {
@@ -35,6 +40,9 @@ export default class RadioCheckbox extends cc.Component {
                 $choice.on('tap', this._handleClick.bind(this));
             }
         });
+        // 设置默认值
+        const defaultValue = this.defaultValue ? this.defaultValue.split(',') : [];
+        defaultValue.forEach(value => this.choose(+value));
     }
 
     // 选择
@@ -62,6 +70,7 @@ export default class RadioCheckbox extends cc.Component {
                 }
             }
         });
+        this.handleChange(index);
         this.node.emit('change', this.chosenData);
     }
 
@@ -72,6 +81,8 @@ export default class RadioCheckbox extends cc.Component {
         });
         this.chosenData.length = 0;
     }
+
+    handleChange(index: number) { }
 
     /// 显示选中元素
     setSelected(index: number, selected: boolean) {
