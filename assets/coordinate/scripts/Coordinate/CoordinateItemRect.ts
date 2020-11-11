@@ -1,5 +1,5 @@
+import { forEachRect } from "../../../utils/utils";
 import Coordinate, { AngleType, faceToMap } from "./Coordinate";
-import { forEachRect } from "./utils";
 
 /**
  * 坐标系工具类中的方块

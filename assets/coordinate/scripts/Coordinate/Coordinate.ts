@@ -1,5 +1,5 @@
+import { forEachRect } from "../../../utils/utils";
 import CoordinateItemRect from "./CoordinateItemRect";
-import { forEachRect, toRadian } from "./utils";
 
 /// 直角坐标系，45 度角坐标系
 export enum AngleType {
