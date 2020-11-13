@@ -7,13 +7,27 @@ export default class CoordinatePeopleTool {
     faceTo: FACE_TO = FACE_TO.TOP;
     /// 地图实例
     coordinate: Coordinate = null;
+    /// 冻结
+    freeze: boolean = false;
 
     /// 事件通信，由外部提供方法实现
     emit(type: string, ...data: any) { }
 
     /// 设置点阵位置
-    setPosition(row: number, col: number) {
-        this._moveTo(row, col, null, false);
+    setPosition(row: number, col: number, withAnim = false) {
+        if (this.freeze) return;
+        this._moveTo(row, col, null, withAnim);
+    }
+
+    /// 设置朝向
+    setFaceTo(faceTo: FACE_TO) {
+        this.faceTo = faceTo;
+        this.emit('face', faceTo);
+    }
+
+    /// 冻结，不许再移动
+    setFreeze(freeze: boolean) {
+        this.freeze = freeze;
     }
 
     /// 向上移动
@@ -40,14 +54,11 @@ export default class CoordinatePeopleTool {
     /// 统一的移动接口
     _moveTo(row: number, col: number, callback?: Function, withAnim = true) {
         const rect = this.coordinate.getRect(row, col);
-        if (!rect) return console.log('未找到此坐标，也许超出了地图');
+        if (!rect) return;
         /// 更新朝向
-        if (this.currentRect) {
-            const { row: originRow, col: originCol } = this.currentRect;
-            this._updateFaceTo(originRow - row, originCol - col);
-        } else {
-            this.setFaceTo(this.faceTo);
-        }
+        if (!this.currentRect) this.currentRect = rect;
+        const { row: originRow, col: originCol } = this.currentRect;
+        this._updateFaceTo(originRow - row, originCol - col);
         /// 移动动画
         this.emit('move', rect, withAnim);
         /// 设置新位置
@@ -63,11 +74,5 @@ export default class CoordinatePeopleTool {
             faceTo = faceToMap[`${distRow},${distCol}`];
         }
         this.setFaceTo(faceTo);
-    }
-
-    /// 统一的设置朝向接口
-    setFaceTo(faceTo: FACE_TO) {
-        this.faceTo = faceTo;
-        this.emit('face', faceTo);
     }
 }

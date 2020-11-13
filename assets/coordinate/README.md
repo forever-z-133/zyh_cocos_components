@@ -39,6 +39,11 @@ export default class MainPeople extends cc.Component {
         if (!withAnim) return this.node.setPosition(x, y);
         else cc.tween(this.node).to(this.moveSpeed, { x, y }).start();
     }
+
+    /// 自定义人物朝向
+    _handleFaceChange(faceTo: FACE_TO) {
+        if (faceTo === FACE_TO.TOP) console.log('脸朝上');
+    }
 }
 ```
 

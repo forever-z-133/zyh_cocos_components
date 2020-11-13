@@ -1,6 +1,15 @@
 /**
  * 公共方法库
  */
+// 单例模式
+export function singleton(func: Function) {
+    let result = undefined;
+    return function (...args: any[]) {
+        if (result) return result;
+        result = new (func.bind.apply(func, [null].concat(args)))();
+        return result;
+    };
+}
 
 /// 随机数
 export function random(n1: number, n2 = 0): number {

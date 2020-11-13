@@ -7,11 +7,13 @@
 * 抽离 Popup 弹窗组件 【[查看代码](https://github.com/forever-z-133/zyh_cocos_components/tree/main/assets/popup)】
 * 抽离 Radio Checkbox 选择组件 【[查看代码](https://github.com/forever-z-133/zyh_cocos_components/tree/main/assets/radio-checkbox)】
 * 抽离 Coordinate 坐标系工具 【[查看代码](https://github.com/forever-z-133/zyh_cocos_components/tree/main/assets/coordinate)】
+* 抽离 ProgressBar 进度条组件 【[查看代码](https://github.com/forever-z-133/zyh_cocos_components/tree/main/assets/components/progress-bar)】
 
 ## 其他
 
 * 公共方法 【[查看代码](https://github.com/forever-z-133/zyh_cocos_components/tree/main/assets/utils/utils.ts)】
 * 公共动画 【[查看代码](https://github.com/forever-z-133/zyh_cocos_components/tree/main/assets/utils/animation.ts)】
+* 抽离 AttackController 攻击计算类 【[查看代码](https://github.com/forever-z-133/zyh_cocos_components/tree/main/assets/attack-controller)】
 
 ## 待完成
 
