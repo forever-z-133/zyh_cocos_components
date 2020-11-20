@@ -1,4 +1,5 @@
 import { AngleType } from "./Coordinate/Coordinate";
+import CoordinateItemRect from "./Coordinate/CoordinateItemRect";
 import MainMap from "./MainMap";
 import MainPeople from "./MainPeople";
 
@@ -30,20 +31,30 @@ export default class MainGame extends cc.Component {
 
     mapComp: MainMap = null;
     peopleComp: MainPeople = null;
+    camera: cc.Camera = null;
 
     onLoad() {
         this.mapComp = this.$map.getComponent(MainMap);
         this.peopleComp = this.$people.getComponent(MainPeople);
-        this.init();
         cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this._handleKeyDown, this);
     }
 
-    async init() {
+    start() {
+        this.init();
+    }
+
+    init() {
+        // 初始化地图
         this.mapComp.init();
-        await this.peopleComp.bindMap(this.mapComp);
+        // 初始化人物
+        this.peopleComp.bindMap(this.mapComp);
+        // 初始化摄像头
+        this.camera = cc.Camera.findCamera(this.node);
+        this.peopleComp.bindCamera(this.camera);
+        // 人物初始位置
         const first = this.mapComp.lineData[0];
-        const [row, col] = first.split('');
-        this.peopleComp.setPosition(+row, +col);
+        const [row, col] = first.split('').map(e => +e);
+        this.peopleComp.setPosition(row, col);
     }
 
     /// 键盘事件

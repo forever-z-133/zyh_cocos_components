@@ -22,7 +22,7 @@ const faceToChineseMap = {
 @ccclass
 export default class MainPeople extends cc.Component {
     /// 基础配置
-    moveSpeed: number = 0.1;
+    moveSpeed: number = 0.5;
 
     /// 地图位置与朝向计算工具类
     mapTool: CoordinatePeopleTool = null;
@@ -30,31 +30,59 @@ export default class MainPeople extends cc.Component {
     /// 地图实例
     map: MainMap = null;
 
+    /// 本元素动画
+    camera: cc.Camera = null;
+
+    worldPoint = new cc.Vec2(-480, -320);
+
     onLoad() {
         this.node.on('move', this._handleMove, this);
         this.node.on('face', this._handleFaceChange, this);
     }
 
-    async bindMap(map: MainMap) {
+    bindMap(map: MainMap) {
         this.map = map;
         this.node.parent = this.map.node;
-        await this.initMapTool();
+        this.node.setPosition(0, 0);
+        this.mapTool = new CoordinatePeopleTool();
+        this.mapTool.coordinate = this.map.coordinate;
+        this.mapTool.emit = this.node.emit.bind(this.node);
     }
 
-    async initMapTool() {
-        return new Promise((resolve) => {
-            this.mapTool = new CoordinatePeopleTool();
-            this.mapTool.coordinate = this.map.coordinate;
-            this.mapTool.emit = this.node.emit.bind(this.node);
-            setTimeout(() => resolve());
-        });
+    bindCamera(camera: cc.Camera) {
+        this.camera = camera;
     }
 
-    _handleMove(rect: CoordinateItemRect, withAnim = true) {
-        const { x, y } = rect.getCenterPoint();
-        if (!withAnim) return this.node.setPosition(x, y);
-        else cc.tween(this.node).to(this.moveSpeed, { x, y }).start();
+    /// 触发移动
+    _handleMove(from: CoordinateItemRect, to: CoordinateItemRect, withAnim = true) {
+        this._handlePeopleMove(from, to, withAnim);
+        this._handleCameraMove(from, to, withAnim);
     }
+    /// 触发人物移动
+    _handlePeopleMove(from: CoordinateItemRect, to: CoordinateItemRect, withAnim = true) {
+        const { x, y } = to.getCenterPoint();
+        const node = this.node;
+        if (!withAnim) {
+            node.setPosition(x, y);
+        } else {
+            cc.tween(node).to(this.moveSpeed, { x, y }).start();
+        }
+    }
+    /// 同时触发摄像头移动
+    _handleCameraMove(from: CoordinateItemRect, to: CoordinateItemRect, withAnim = true) {
+        const { x: fromX, y: fromY } = from.getCenterPoint();
+        const { x: toX, y: toY } = to.getCenterPoint();
+        const node = this.camera.node;
+        const pos = this.node.convertToWorldSpaceAR(this.worldPoint);
+        const x = pos.x + (toX - fromX);
+        const y = pos.y + (toY - fromY);
+        if (!withAnim) {
+            node.setPosition(x, y);
+        } else {
+            cc.tween(node).to(this.moveSpeed, { x, y }).start();
+        }
+    }
+    /// 触发朝向变化
     _handleFaceChange(faceTo: FACE_TO) {
         const $label = this.node.getChildByName('face-to').getComponent(cc.Label);
         if (faceToChineseMap[faceTo]) {
@@ -64,8 +92,12 @@ export default class MainPeople extends cc.Component {
         }
     }
 
+    dequeueMoveEvent() {
+
+    }
+
     setPosition(row: number, col: number) {
-        this.mapTool.setPosition(row, col);
+        this.mapTool.setPosition(row, col, false);
     }
     /// 向上移动
     moveUp(distence = 1, callback?: Function) {
