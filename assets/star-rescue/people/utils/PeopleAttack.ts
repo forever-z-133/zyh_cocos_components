@@ -1,4 +1,4 @@
-import ProgressBar from "../../components/progress-bar/scripts/progress-bar";
+import ProgressBar from "../../../components/progress-bar/scripts/progress-bar";
 import AttackController from "../../game/utils/AttackController";
 import CoordinateItemRect from "../../map/utils/CoordinateItemRect";
 import MiaoAnimation from "../../utils/animation";

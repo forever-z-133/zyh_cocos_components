@@ -1,7 +1,7 @@
 import { AngleType } from "./Coordinate/Coordinate";
 import CoordinateItemRect from "./Coordinate/CoordinateItemRect";
-import MainMap from "./MainMap";
-import MainPeople from "./MainPeople";
+import MainMap from "./MainMap2";
+import MainPeople from "./MainPeople2";
 
 const { ccclass, property } = cc._decorator;
 

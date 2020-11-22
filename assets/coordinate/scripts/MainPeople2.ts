@@ -1,7 +1,7 @@
 import { FACE_TO } from "./Coordinate/Coordinate";
 import CoordinateItemRect from "./Coordinate/CoordinateItemRect";
 import CoordinatePeopleTool from "./Coordinate/CoordinatePeopleTool";
-import MainMap from "./MainMap";
+import MainMap from "./MainMap2";
 
 const { ccclass, property } = cc._decorator;
 
