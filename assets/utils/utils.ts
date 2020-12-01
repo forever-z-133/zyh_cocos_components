@@ -15,7 +15,7 @@ export function singleton(func: Function) {
 export function random(n1: number, n2 = 0): number {
     const min = n1 < n2 ? n1 : n2;
     const max = n1 < n2 ? n2 : n1;
-    return Math.random() * (max - min) + min;
+    return Math.random() * (max - min) + +min;
 }
 
 /// 随机整数

@@ -8,12 +8,15 @@
 * 抽离 Radio Checkbox 选择组件 【[查看代码](https://github.com/forever-z-133/zyh_cocos_components/tree/main/assets/radio-checkbox)】
 * 抽离 Coordinate 坐标系工具 【[查看代码](https://github.com/forever-z-133/zyh_cocos_components/tree/main/assets/coordinate)】
 * 抽离 ProgressBar 进度条组件 【[查看代码](https://github.com/forever-z-133/zyh_cocos_components/tree/main/assets/components/progress-bar)】
+* 抽离 PositionTool 位置计算工具类 【[查看代码](https://github.com/forever-z-133/zyh_cocos_components/tree/main/assets/position-tool)】
+* 抽离随机生成游戏工具类 【[查看代码](https://github.com/forever-z-133/zyh_cocos_components/tree/main/assets/marquee-game)】
 
 ## 其他
 
 * 公共方法 【[查看代码](https://github.com/forever-z-133/zyh_cocos_components/tree/main/assets/utils/utils.ts)】
 * 公共动画 【[查看代码](https://github.com/forever-z-133/zyh_cocos_components/tree/main/assets/utils/animation.ts)】
 * 抽离 AttackController 攻击计算类 【[查看代码](https://github.com/forever-z-133/zyh_cocos_components/tree/main/assets/attack-controller)】
+* 游戏：接水果【[查看代码](https://github.com/forever-z-133/zyh_cocos_components/tree/main/assets/marquee-game)】
 
 ## 待完成
 

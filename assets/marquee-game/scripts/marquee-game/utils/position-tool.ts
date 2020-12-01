@@ -4,21 +4,21 @@
  */
 export default class PositionTool {
     // -------- 获取元素基于左上角计算的位置
-    static getStartX(node: cc.Node): number {
+    static getStartX(node: cc.Node) {
         const { anchorX, width } = node;
         return -anchorX * width;
     }
-    static getEndX(node: cc.Node): number {
+    static getEndX(node: cc.Node) {
         const { anchorX, width } = node;
         return (1 - anchorX) * width;
     }
-    static getStartY(node: cc.Node): number {
+    static getStartY(node: cc.Node) {
         const { anchorY, height } = node;
         return (1 - anchorY) * height;
     }
-    static getEndY(node: cc.Node): number {
+    static getEndY(node: cc.Node) {
         const { anchorY, height } = node;
-        return -anchorY * height;
+        return anchorY * height;
     }
 
     // -------- 获取元素挨在父级边界的位置，共 8 种
