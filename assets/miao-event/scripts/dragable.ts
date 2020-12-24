@@ -160,6 +160,7 @@ export default class DragAble extends cc.Component {
     }
 
     /// 播放动画回归到原始位置
+    cacheDragNode: cc.Node = null;
     triggerDragEndAnimation(location?: any, duration = 0.2, callback?: Function): void {
         if (!this.cacheDragNode) return console.error('代码使用错误');
         const { x, y } = location;

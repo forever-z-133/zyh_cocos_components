@@ -6,7 +6,7 @@ enum EventStatus {
 
 /**
  * 绑定 点击/双击/拖拽/轻滑/长按/缩放 事件
- * 比如 tap/click/dbclick/longtap/(drag|scale|rotate)start/swipe 等
+ * 比如 tap/rightTap/click/dbclick/longtap/(drag|scale|rotate)start/swipe/hold 等
  * 
  * 作用：
  * 简化事件绑定，拓展可绑定事件；
@@ -57,6 +57,7 @@ export default class MiaoEvent {
     node.on(cc.Node.EventType.TOUCH_MOVE, this._onTouchMove, this);
     node.on(cc.Node.EventType.TOUCH_END, this._onTouchEnd, this);
     node.on(cc.Node.EventType.TOUCH_CANCEL, this._onTouchEnd, this);
+    node.on(cc.Node.EventType.MOUSE_UP, this._onMouseEnd, this);
   }
   /// 解绑基础事件，不同端可覆盖
   unbindEvent(node: cc.Node) {
@@ -72,6 +73,10 @@ export default class MiaoEvent {
   }
 
   /// 事件绑定的函数
+  _onMouseEnd(e: cc.Event.EventMouse): void {
+    const button = e.getButton();
+    if (button === 2) this._triggerEvent('rightTap', e, true);
+  }
   _onTouchStart(e: cc.Event.EventTouch): void {
     if (this.disabled) return;
     const now: number = Date.now();
@@ -128,9 +133,9 @@ export default class MiaoEvent {
       if (delta > this.longTapDelay) {
         this._triggerEvent('longtap', evt);
       }
-      // tap 几乎可认为就是 end，响应更快但更易与其他事件冲突，视情况选择使用
-      this._triggerEvent('tap', evt, false);
     }
+    // tap 就是 touchend，响应更快但会与其他事件冲突，视情况选择使用
+    this._triggerEvent('tap', evt, false);
     this.longTapFlag = false;
   }
   _afterDbClickTimeDelay() {
@@ -146,16 +151,20 @@ export default class MiaoEvent {
   }
 
   /// 内部触发事件
-  _triggerEvent(name: string, e: cc.Event.EventTouch, reset = true) {
+  _triggerEvent(name: string, e: cc.Event, reset = true) {
     e.type = name;
     if (reset) {
       this.eventStatus = null;
       this.tempFirstEvent = null;
       this.tempMoveDelta = cc.Vec2.ZERO;
     }
-    switch(name) {
+    switch (name) {
       case 'tap': {
         this.dispathEvent('tap', e);
+        break;
+      }
+      case 'rightTap': {
+        this.dispathEvent('rightTap', e);
         break;
       }
       case 'click': {
