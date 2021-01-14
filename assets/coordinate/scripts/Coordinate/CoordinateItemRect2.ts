@@ -1,10 +1,10 @@
 import { forEachRect } from "../../../utils/utils";
-import Coordinate, { AngleType, faceToMap } from "./Coordinate";
+import Coordinate, { AngleType, faceToMap } from "./Coordinate2";
 
 /**
  * 坐标系工具类中的方块
  */
-export default class CoordinateItemRect extends cc.Rect {
+export default class CoordinateItemRect2 extends cc.Rect {
     public row: number = 0;
     public col: number = 0;
     public angle: AngleType = AngleType.VerticalAngle;
@@ -25,7 +25,7 @@ export default class CoordinateItemRect extends cc.Rect {
         return new cc.Vec2(centerX, centerY);
     }
     /// 获取相邻的四个元素
-    getSiblingItems(): { [name: string]: CoordinateItemRect } {
+    getSiblingItems(): { [name: string]: CoordinateItemRect2 } {
         return {
             top: this.coordinate.getRect(this.row, this.col - 1),
             bottom: this.coordinate.getRect(this.row, this.col + 1),
@@ -34,9 +34,9 @@ export default class CoordinateItemRect extends cc.Rect {
         }
     }
     /// 获取相邻范围内的所有元素
-    getItemsByDistence(distence = 1): CoordinateItemRect[] {
+    getItemsByDistence(distence = 1): CoordinateItemRect2[] {
         const length = 1 + 2 * distence;
-        const result: CoordinateItemRect[] = [];
+        const result: CoordinateItemRect2[] = [];
         forEachRect(length, length, (row, col) => {
             const distRow = col - 1 + this.row;
             const distCol = row - 1 + this.col;
@@ -46,7 +46,7 @@ export default class CoordinateItemRect extends cc.Rect {
         return result;
     }
     /// 获取本方格在另一个方格的什么方向
-    getFaceToFromOtherItem(rect: CoordinateItemRect) {
+    getFaceToFromOtherItem(rect: CoordinateItemRect2) {
         const distX = Math.max(-1, Math.min(1, this.row - rect.row));
         const distY = Math.max(-1, Math.min(1, this.col - rect.col));
         const faceTo = faceToMap[`${distX},${distY}`];

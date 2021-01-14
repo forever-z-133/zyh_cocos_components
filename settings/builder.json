@@ -1,8 +1,21 @@
 {
   "title": "zyh_cocos_components",
   "packageName": "",
-  "startScene": "849bd5d6-9e1a-43f5-b695-5d5e4597a1b0",
-  "excludeScenes": [],
+  "startScene": "a8de69a3-dc93-4a51-8535-88c179b760bb",
+  "excludeScenes": [
+    "f628bf7b-6c94-4170-b39c-fe699715277d",
+    "849bd5d6-9e1a-43f5-b695-5d5e4597a1b0",
+    "e20f4282-cb71-4dd4-a4f6-41293f652a2c",
+    "0edc17d9-2bbd-403b-ab45-d9e4febf8466",
+    "36139eda-fbe1-46e6-adf3-4a0a7b1e59fb",
+    "03e3f086-91c7-4c15-82e7-963a716c73e1",
+    "75945af2-fa2c-49b5-9ecc-cc90f05a8e5f",
+    "cac996e7-233a-432e-b928-ff08fc34e366",
+    "6660ee63-af28-45d7-a9cc-9bd537a5cae8",
+    "e2110fcd-64c3-4816-bd17-24ff1f955549",
+    "3cc378f3-622c-4e02-b750-8d7caf8d7911",
+    "3f824361-4e5e-486d-ba23-0bf68af26abf"
+  ],
   "includeSDKBox": false,
   "orientation": {
     "landscapeLeft": true,
@@ -21,15 +34,24 @@
   "zipCompressJs": true,
   "fb-instant-games": {},
   "android": {
+    "REMOTE_SERVER_ROOT": "",
     "packageName": ""
   },
   "ios": {
+    "REMOTE_SERVER_ROOT": "",
     "packageName": ""
   },
   "mac": {
-    "packageName": ""
+    "REMOTE_SERVER_ROOT": "",
+    "height": 720,
+    "packageName": "",
+    "width": 1280
   },
-  "win32": {},
+  "win32": {
+    "REMOTE_SERVER_ROOT": "",
+    "height": 720,
+    "width": 1280
+  },
   "android-instant": {
     "REMOTE_SERVER_ROOT": "",
     "host": "",
@@ -39,5 +61,8 @@
     "scheme": "https",
     "skipRecord": false
   },
-  "appBundle": false
+  "appBundle": false,
+  "mainCompressionType": "default",
+  "mainIsRemote": false,
+  "nativeMd5Cache": true
 }

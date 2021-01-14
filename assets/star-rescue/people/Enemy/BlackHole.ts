@@ -1,5 +1,5 @@
+import MiaoAnimation from "../../../utils/animation";
 import CoordinateItemRect from "../../map/utils/CoordinateItemRect";
-import MiaoAnimation from "../../utils/animation";
 import MainPeople from "../MainPeople";
 import PeopleAttack from "../utils/PeopleAttack";
 

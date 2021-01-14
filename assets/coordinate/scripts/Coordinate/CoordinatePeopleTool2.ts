@@ -1,5 +1,5 @@
-import Coordinate, { faceToMap, FACE_TO } from "./Coordinate";
-import CoordinateItemRect from "./CoordinateItemRect";
+import Coordinate, { faceToMap, FACE_TO } from "./Coordinate2";
+import CoordinateItemRect from "./CoordinateItemRect2";
 
 export default class CoordinatePeopleTool {
     /// 基础信息

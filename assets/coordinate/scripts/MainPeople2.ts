@@ -1,6 +1,6 @@
-import { FACE_TO } from "./Coordinate/Coordinate";
-import CoordinateItemRect from "./Coordinate/CoordinateItemRect";
-import CoordinatePeopleTool from "./Coordinate/CoordinatePeopleTool";
+import { FACE_TO } from "./Coordinate/Coordinate2";
+import CoordinateItemRect from "./Coordinate/CoordinateItemRect2";
+import CoordinatePeopleTool from "./Coordinate/CoordinatePeopleTool2";
 import MainMap from "./MainMap2";
 
 const { ccclass, property } = cc._decorator;

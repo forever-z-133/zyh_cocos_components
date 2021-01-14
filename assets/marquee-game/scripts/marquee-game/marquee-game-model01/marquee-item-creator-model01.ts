@@ -1,6 +1,6 @@
+import PositionTool from "../../../../position-tool/scripts/position-tool";
 import { randomInt } from "../../../../utils/utils";
 import marquee_item_creator from "../utils/marquee-item-creator";
-import PositionTool from "../utils/position-tool";
 import marquee_game_model01 from "./marquee-game-model01";
 import marquee_item_model01 from "./marquee-item-model01";
 

@@ -1,5 +1,5 @@
-import Coordinate, { AngleType } from "./Coordinate/Coordinate";
-import CoordinateItemRect from "./Coordinate/CoordinateItemRect";
+import Coordinate, { AngleType } from "./Coordinate/Coordinate2";
+import CoordinateItemRect from "./Coordinate/CoordinateItemRect2";
 
 const { ccclass, property } = cc._decorator;
 

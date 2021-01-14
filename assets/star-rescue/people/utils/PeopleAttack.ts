@@ -1,7 +1,7 @@
 import ProgressBar from "../../../components/progress-bar/scripts/progress-bar";
+import MiaoAnimation from "../../../utils/animation";
 import AttackController from "../../game/utils/AttackController";
 import CoordinateItemRect from "../../map/utils/CoordinateItemRect";
-import MiaoAnimation from "../../utils/animation";
 import MainPeople from "../MainPeople";
 
 const { ccclass, property } = cc._decorator;

@@ -1,4 +1,4 @@
-import { forEachRect } from "../../utils/utils";
+import { forEachRect } from "../../../utils/utils";
 import Coordinate, { AngleType, faceToMap } from "./Coordinate";
 
 /**

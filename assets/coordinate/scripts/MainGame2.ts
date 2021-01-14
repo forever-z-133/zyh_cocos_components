@@ -1,5 +1,5 @@
-import { AngleType } from "./Coordinate/Coordinate";
-import CoordinateItemRect from "./Coordinate/CoordinateItemRect";
+import { AngleType } from "./Coordinate/Coordinate2";
+import CoordinateItemRect from "./Coordinate/CoordinateItemRect2";
 import MainMap from "./MainMap2";
 import MainPeople from "./MainPeople2";
 

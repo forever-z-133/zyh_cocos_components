@@ -1,4 +1,4 @@
-import MiaoAnimation from "../../utils/animation";
+import MiaoAnimation from "../../../utils/animation";
 import MainPeople from "../MainPeople";
 import PeopleAttack from "../utils/PeopleAttack";
 

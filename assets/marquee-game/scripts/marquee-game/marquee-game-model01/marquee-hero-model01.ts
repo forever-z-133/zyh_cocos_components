@@ -1,5 +1,4 @@
-import marquee_item from "../utils/marquee-item";
-import PositionTool from "../utils/position-tool";
+import PositionTool from "../../../../position-tool/scripts/position-tool";
 
 const { ccclass, property } = cc._decorator;
 

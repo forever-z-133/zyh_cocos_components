@@ -1,4 +1,4 @@
-import { forEachRect } from "../../utils/utils";
+import { forEachRect } from "../../../utils/utils";
 import CoordinateItemRect from "./CoordinateItemRect";
 
 /// 直角坐标系，45 度角坐标系
